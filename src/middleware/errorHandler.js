@@ -1,3 +1,12 @@
+export function errorHandler(err, req, res, next) {
+  if (err instanceof MiErrorPersonalizado) {
+    res.status(err.status).json({ error: err.message, status: err.status })
+  } else {
+    // Manejo de otros errores
+    res.status(500).json({ error: 'Error interno del servidor' })
+  }
+}
+
 class MiErrorPersonalizado extends Error {
   constructor(message, status) {
     super()
@@ -9,12 +18,3 @@ class MiErrorPersonalizado extends Error {
 }
 
 export default MiErrorPersonalizado
-
-export function errorHandler(err, req, res, next) {
-  if (err instanceof MiErrorPersonalizado) {
-    res.status(err.status).json({ error: err.message, status: err.status })
-  } else {
-    // Manejo de otros errores
-    res.status(500).json({ error: 'Error interno del servidor' })
-  }
-}

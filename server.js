@@ -7,7 +7,6 @@ import { errorHandler } from './src/middleware/errorHandler.js'
 import authRoutes from './src/routes/authRoutes.js'
 import userRoutes from './src/routes/userRoutes.js'
 
-// Configura las variables de entorno desde el archivo .env
 dotenv.config()
 
 const app = express()

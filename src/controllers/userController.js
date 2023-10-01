@@ -1,6 +1,5 @@
 import MiErrorPersonalizado from '../middleware/errorHandler.js'
 
-// const MiErrorPersonalizado = require('../middleware/errorHandler')
 export const getAllUsers = (req, res, next) => {
   res.json({ message: 'Obteniendo todos los usuarios' })
 }
