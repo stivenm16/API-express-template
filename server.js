@@ -12,8 +12,6 @@ dotenv.config()
 const app = express()
 app.use(cors())
 
-const usersData = JSON.parse(fs.readFileSync('./src/data/users.json'))
-
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)
