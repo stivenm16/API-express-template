@@ -1,7 +1,7 @@
 // userRoutes.js
 import express from 'express'
 import fs from 'fs/promises'
-import jwt from 'jsonwebtoken'
+import { getAllUsers, getLogin } from '../controllers/userController.js'
 import { authenticateToken } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
@@ -10,16 +10,10 @@ const router = express.Router()
 const usersData = await fs.readFile('./src/data/users.json')
 
 router.get('/', authenticateToken, (req, res) => {
-  console.log('doneeee')
   res.json({ res: 'funciona' })
 })
-router.post('/login', (req, res) => {
-  console.log('prueba')
-  const user = { id: 1, username: 'usuario1' }
-  const accessToken = jwt.sign(user, 'your-secret-key')
-  res.json({ accessToken, userStatus: 'Autenticado!' })
-})
+router.post('/login', authenticateToken, getLogin)
 
-// Agregar más rutas para manipular los datos según sea necesario
+router.post('/getAllUser', authenticateToken, getAllUsers)
 
 export default router

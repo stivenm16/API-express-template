@@ -1,22 +1,15 @@
 // src/routes/authRoutes.js
 import express from 'express'
-import jwt from 'jsonwebtoken'
+import { getToken } from '../controllers/AuthController.js'
+import { getAllUsers } from '../controllers/userController.js'
 import { authenticateToken } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
 // Endpoint para la autenticación (iniciar sesión)
-router.post('/login', (req, res) => {
-  const user = { id: 1, username: 'usuario1' }
-  const accessToken = jwt.sign(user, 'your-secret-key', {
-    expiresIn: '1h',
-  })
-  res.json({ accessToken })
-})
+router.post('/getToken', getToken)
 
 // Ruta protegida que requiere autenticación
-router.get('/profile', authenticateToken, (req, res) => {
-  res.json(req.user)
-})
+router.get('/getAllUser', authenticateToken, getAllUsers)
 
 export default router
