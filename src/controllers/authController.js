@@ -1,4 +1,6 @@
-export const getToken = (req, res) => {
+import jwt from 'jsonwebtoken'
+
+const getToken = (req, res) => {
   const user = { id: 1, username: 'usuario1' }
 
   const accessToken = jwt.sign(user, process.env.SECRET_KEY, {
@@ -6,3 +8,5 @@ export const getToken = (req, res) => {
   })
   res.json({ accessToken })
 }
+
+export default getToken
